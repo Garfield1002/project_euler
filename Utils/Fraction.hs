@@ -58,3 +58,28 @@ instance Fractional Fraction where
     fromRational a            = Frac n d
                                 where n = numerator a
                                       d = denominator a
+
+
+-- ==========================================================================
+--                          Continued Fractions
+-- ==========================================================================
+
+-- | Converts a continuous fraction represented as a list
+--   to a simplified fraction.
+continuousFrac :: [Integer] -> Fraction
+continuousFrac []    = infinity
+continuousFrac (h:t) = h // 1 + 1 / continuousFrac t
+
+-- | The series of continued fractions for the square root of n
+cfSqrt :: Integer -> [Integer]
+cfSqrt n = frac' (1, 0, 1) [] []
+    where   frac' s acc acc' =
+                let (e, s') = step s n in
+                if s' `elem` acc'
+                then let (h:t) = reverse (e:acc) in h: cycle t
+                else frac' s' (e:acc) (s':acc')
+            step (a, b, c) n =
+                let e = truncate $ (fromIntegral a * sqrt (fromIntegral n) + fromIntegral b) / fromIntegral c in
+                let (a', b', c') = (a * c, c^2 * e - b * c, a^2 * n - (b - c * e)^2) in
+                let g = gcd a' $ gcd b' c' in
+                (e, (quot a' g, quot b' g, quot c' g))

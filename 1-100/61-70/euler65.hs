@@ -1,13 +1,5 @@
-import Utils.Fraction ( Fraction, (//), infinity, num)
+import Utils.Fraction ( Fraction, (//), infinity, num, continuousFrac)
 import Utils.Miscellaneous (listDigits)
-
-{-
-    Converts a continuous fraction represented as a list
-    to a tuple representing a simplified fraction.
--}
-continuousFrac :: [Integer] -> Fraction
-continuousFrac []    = infinity
-continuousFrac (h:t) = h // 1 + 1 / continuousFrac t
 
 eCF :: [Integer]
 eCF = 2 : 1 : eCF' 1
