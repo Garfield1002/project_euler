@@ -1,4 +1,20 @@
 module Utils.Miscellaneous where
+import qualified Data.List as L
+
+-- ============================================================================
+--                                Operations on Lists
+-- ============================================================================
+
+-- | The `permutations` function computes the permutations of a list.
+permutations :: [a] -> [[a]]
+permutations []   = [[]]
+permutations (h:t) = concatMap (insertH []) (permutations t)
+                    where insertH l [] = [h:l]
+                          insertH l (h':t') = (h':t' ++ h:l) : insertH (h':l) t'
+
+-- ============================================================================
+--                                Operations on Numbers
+-- ============================================================================
 
 -- | The `listDigits` function computes the digits of a number represented as a list.
 --
