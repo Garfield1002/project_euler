@@ -4,8 +4,6 @@ Here are solutions to the (soon) first 100 [project euler](https://projecteuler.
 
 They work, but are probably not the most efficient / elegant solutions.
 
-I **tried** to stick with _elegant_, [point free](https://wiki.haskell.org/Pointfree) programs as much as possible.
-
 If you have any idea for an improvement, feel free to contribute, I would gladly approve new solutions.
 
 ## ⚙ Running the programs
