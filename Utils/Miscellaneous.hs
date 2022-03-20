@@ -26,15 +26,22 @@ permutations (h : t) = concatMap (insertH []) (permutations t)
 --                                Operations on Numbers
 -- ============================================================================
 
--- | The `listDigits` function computes the digits of a number represented as a list.
+-- | The `num2digits` function computes the digits of a number represented as a list.
 --
 -- ⚠ This list is reversed.
-listDigits :: Integral a => a -> [a]
-listDigits n
+num2digits :: Integral a => a -> [a]
+num2digits n
   | q == 0 = [r]
-  | otherwise = r : listDigits q
+  | otherwise = r : num2digits q
   where
     (q, r) = divMod n 10
+
+-- | The `digitList` function computes a number based on a list of its digits.
+--
+-- ⚠ This list is reversed.
+digits2num :: Num p => [p] -> p
+digits2num [] = 0
+digits2num (x : xs) = x + 10 * digits2num xs
 
 -- | The `intSqrt` function computes the integer square root of an integer \(n\)
 --
